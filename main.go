@@ -57,6 +57,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					outmsg.WriteString("溫馨提醒-1")
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
 					log.Print(err)
+					}
 				}
 				
 				if strings.HasSuffix(message.Text, "還是那麼帥") {
@@ -64,6 +65,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					outmsg.WriteString("+1")
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
 					log.Print(err)
+					}
 				}
 			}
 		}
