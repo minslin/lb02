@@ -96,4 +96,5 @@ func GetPPAPText() string {
 	case 4:
 		return "我是不會接著唱的！"
 	}
+	return "去問 siri 啦"
 }
