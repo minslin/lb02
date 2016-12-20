@@ -1,5 +1,5 @@
 {
-  "name": "LineBot02",
+  "name": "LineBotTemplate",
   "description": "BinBin Line Bot",
   "repository": "https://github.com/biii/lb02",
   "keywords": ["Line", "go", "static"],
