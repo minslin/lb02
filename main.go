@@ -53,7 +53,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			case *linebot.TextMessage:
 				var outmsg bytes.Buffer
 
-				if strings.Compare(message.Text, "溫馨提醒") {
+				if strings.Compare(message.Text, "溫馨提醒") == 0 {
 					outmsg.WriteString("溫馨提醒-1")
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
 					log.Print(err)
