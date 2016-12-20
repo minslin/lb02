@@ -17,6 +17,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
+	"bytes"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -49,7 +51,18 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.ID+":"+message.Text+" OK!2")).Do(); err != nil {
+				var outmsg bytes.Buffer
+
+				if strings.Compare(message.Text, "溫馨提醒") {
+					outmsg.WriteString("溫馨提醒-1")
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
+					log.Print(err)
+				}
+				
+				if strings.HasSuffix(message.Text, "還是那麼帥") {
+					outmsg.WriteString(message.Text)
+					outmsg.WriteString("+1")
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
 					log.Print(err)
 				}
 			}
