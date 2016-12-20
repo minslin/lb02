@@ -67,7 +67,31 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					log.Print(err)
 					}
 				}
+				
+				if strings.Compare(message.Text, "PPAP") == 0 {
+					outmsg.WriteString(GetPPAPText())
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
+					log.Print(err)
+					}
+				}
 			}
 		}
+	}
+}
+
+func GetPPAPText() string {
+	rand.Seed(time.Now().UnixNano())
+	i := rand.Intn(100)
+	switch i % 5 {
+	case 0:
+		return "I have a pencil,\r\nI have an Apple,\r\nApple pencil.\r\nI have a watch,\r\nI have an Apple,\r\nApple watch."
+	case 1:
+		return "順帶一提，請不要把Apple Pencil刺進水果裡，不管是蘋果還是鳳梨。"
+	case 2:
+		return "我懂了，這是以書寫工具與種類食物為題的饒舌歌。"
+	case 3:
+		return "我不太清楚PPAP是什麼，但你可以問我AAPL的相關資訊。"
+	case 4:
+		return "我是不會接著唱的！"
 	}
 }
