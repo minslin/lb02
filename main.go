@@ -19,6 +19,8 @@ import (
 	"os"
 	"strings"
 	"bytes"
+	"math/rand"
+	"time"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
