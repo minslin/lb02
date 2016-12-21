@@ -57,20 +57,21 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			case *linebot.TextMessage:
 				var outmsg bytes.Buffer
 
-				if strings.Compare(message.Text, "溫馨提醒") == 0 {
-					outmsg.WriteString("<<<溫馨提醒>>>\r\n因為這個群很吵 -->\r\n右上角 可以 關閉提醒\r\n\r\n[同學會] 投票進行中 -->\r\n右上角 筆記本 可以進行投票\r\n\r\n[通訊錄] 需要大家的協助 -->\r\n右上角 筆記本 請更新自己的聯絡方式")
-				}
-				else if strings.HasSuffix(message.Text, "麼帥") {
-					outmsg.WriteString(GetHandsonText(message.Text))
-				}
-				else if strings.Compare(message.Text, "PPAP") == 0 {
-					outmsg.WriteString(GetPPAPText())
-				}
-				else if strings.HasPrefix(message.Text, "小幫手") {
-					outmsg.WriteString(DoTrans(gkey, "en", strings.TrimLeft(message.Text, "小幫手"))
-				}
-				else {
-					continue
+				switch {
+					case strings.Compare(message.Text, "溫馨提醒") == 0:
+						outmsg.WriteString("<<<溫馨提醒>>>\r\n因為這個群很吵 -->\r\n右上角 可以 關閉提醒\r\n\r\n[同學會] 投票進行中 -->\r\n右上角 筆記本 可以進行投票\r\n\r\n[通訊錄] 需要大家的協助 -->\r\n右上角 筆記本 請更新自己的聯絡方式")
+					
+					case strings.HasSuffix(message.Text, "麼帥"):
+						outmsg.WriteString(GetHandsonText(message.Text))
+
+					case strings.Compare(message.Text, "PPAP") == 0:
+						outmsg.WriteString(GetPPAPText())
+
+					case strings.HasPrefix(message.Text, "小幫手"):
+						outmsg.WriteString(DoTrans(gkey, "en", strings.TrimLeft(message.Text, "小幫手"))
+
+					default:
+						continue
 				}
 				
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
