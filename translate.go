@@ -11,7 +11,6 @@ package main
 
 import (
 	"encoding/json"
-	"flag"
 	"fmt"
 	"html"
 	"io/ioutil"
@@ -19,13 +18,7 @@ import (
 	"net/http"
 	"net/url"
 	"bytes"
-)
-
-var (
-	// https://developers.google.com/translate/v2/using_rest#supported-query-params
-	key    = flag.String("key", "", "Google API key (defaults to $GOOGLEAPIKEY)")
-	target = flag.String("to", "en", "destination language (two-letter code)")
-	source = flag.String("from", "", "source language (two-letter code); auto-detected by default")
+	"strings"
 )
 
 type Response struct {
@@ -37,6 +30,22 @@ type Response struct {
 type Translation struct {
 	TranslatedText         string
 	DetectedSourceLanguage string
+}
+
+func GetTransText(key string, text string) string {
+	var target = "en"
+	var intext = text
+	switch {
+		case strings.HasPrefix(text, "ä¸?):
+			target = "zh-TW"
+			intext = strings.TrimLeft(text, "ä¸?)
+		case strings.HasPrefix(text, "??):
+			target = "jp"
+			intext = strings.TrimLeft(text, "??)
+		case strings.HasPrefix(text, "??):
+			intext = strings.TrimLeft(text, "??)
+	}
+	return DoTrans(key, target, intext);
 }
 
 func DoTrans(key string, target string, text string) string {

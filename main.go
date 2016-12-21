@@ -67,8 +67,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					case strings.Compare(message.Text, "PPAP") == 0:
 						outmsg.WriteString(GetPPAPText())
 
-					case strings.HasPrefix(message.Text, "小幫手"):
-						outmsg.WriteString(DoTrans(gkey, "en", strings.TrimLeft(message.Text, "小幫手")))
+					case strings.HasPrefix(message.Text, "翻翻"):
+						outmsg.WriteString(GetTransText(gkey, strings.TrimLeft(message.Text, "翻翻")))
 
 					default:
 						continue
