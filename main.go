@@ -68,14 +68,14 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						outmsg.WriteString(GetPPAPText())
 
 					case strings.HasPrefix(message.Text, "小幫手"):
-						outmsg.WriteString(DoTrans(gkey, "en", strings.TrimLeft(message.Text, "小幫手"))
+						outmsg.WriteString(DoTrans(gkey, "en", strings.TrimLeft(message.Text, "小幫手")))
 
 					default:
 						continue
 				}
 				
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
-				log.Print(err)
+					log.Print(err)
 				}
 			}
 		}
