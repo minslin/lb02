@@ -62,9 +62,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					}
 				}
 				
-				if strings.HasSuffix(message.Text, "還是那麼帥") {
-					outmsg.WriteString(message.Text)
-					outmsg.WriteString("+1")
+				//if strings.HasSuffix(message.Text, "還是那麼帥") {
+				if strings.HasSuffix(message.Text, "麼帥") {
+					outmsg.WriteString(GetHandsonText())
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
 					log.Print(err)
 					}
@@ -79,6 +79,35 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
+}
+
+func GetHandsonText() string {
+	var outmsg bytes.Buffer	
+	rand.Seed(time.Now().UnixNano())
+	i := rand.Intn(100)
+	outmsg.WriteString("我覺得還是")
+	switch i % 9 {
+	case 0:
+		outmsg.WriteString("小明")
+	case 1:
+		outmsg.WriteString("彬彬")
+	case 2:
+		outmsg.WriteString("登榮")
+	case 3:
+		outmsg.WriteString("灯能")
+	case 4:
+		outmsg.WriteString("品爺")
+	case 5:
+		outmsg.WriteString("建良")
+	case 6:
+		outmsg.WriteString("虎二")
+	case 7:
+		outmsg.WriteString("志偉")
+	case 8:
+		outmsg.WriteString("芭樂妹")
+	}
+	outmsg.WriteString("比較帥")
+	return outmsg.String()	
 }
 
 func GetPPAPText() string {
