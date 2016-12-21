@@ -40,7 +40,7 @@ func GetTransText(key string, text string) string {
 			target = "zh-TW"
 			intext = strings.TrimLeft(text, "中")
 		case strings.HasPrefix(text, "日"):
-			target = "jp"
+			target = "ja"
 			intext = strings.TrimLeft(text, "日")
 		case strings.HasPrefix(text, "英"):
 			intext = strings.TrimLeft(text, "英")
