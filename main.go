@@ -81,7 +81,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func GetHandsonText(inText) string {
+func GetHandsonText(inText string) string {
 	var outmsg bytes.Buffer	
 	var outText bytes.Buffer
 	rand.Seed(time.Now().UnixNano())
