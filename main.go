@@ -26,10 +26,12 @@ import (
 )
 
 var bot *linebot.Client
+var gkey string
 
 func main() {
 	var err error
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
+	gkey = os.Getenv("GOOGLEAPIKEY")
 	log.Println("Bot:", bot, " err:", err)
 	http.HandleFunc("/callback", callbackHandler)
 	port := os.Getenv("PORT")
@@ -57,24 +59,22 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 				if strings.Compare(message.Text, "溫馨提醒") == 0 {
 					outmsg.WriteString("<<<溫馨提醒>>>\r\n因為這個群很吵 -->\r\n右上角 可以 關閉提醒\r\n\r\n[同學會] 投票進行中 -->\r\n右上角 筆記本 可以進行投票\r\n\r\n[通訊錄] 需要大家的協助 -->\r\n右上角 筆記本 請更新自己的聯絡方式")
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
-					log.Print(err)
-					}
 				}
-				
-				//if strings.HasSuffix(message.Text, "還是那麼帥") {
-				if strings.HasSuffix(message.Text, "麼帥") {
+				else if strings.HasSuffix(message.Text, "麼帥") {
 					outmsg.WriteString(GetHandsonText(message.Text))
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
-					log.Print(err)
-					}
+				}
+				else if strings.Compare(message.Text, "PPAP") == 0 {
+					outmsg.WriteString(GetPPAPText())
+				}
+				else if strings.HasPrefix(message.Text, "小幫手") {
+					outmsg.WriteString(DoTrans(gkey, "en", strings.TrimLeft(message.Text, "小幫手"))
+				}
+				else {
+					continue
 				}
 				
-				if strings.Compare(message.Text, "PPAP") == 0 {
-					outmsg.WriteString(GetPPAPText())
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
-					log.Print(err)
-					}
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
+				log.Print(err)
 				}
 			}
 		}
