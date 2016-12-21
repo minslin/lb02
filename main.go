@@ -64,7 +64,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				
 				//if strings.HasSuffix(message.Text, "還是那麼帥") {
 				if strings.HasSuffix(message.Text, "麼帥") {
-					outmsg.WriteString(GetHandsonText())
+					outmsg.WriteString(GetHandsonText(message.Text))
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(outmsg.String())).Do(); err != nil {
 					log.Print(err)
 					}
@@ -81,12 +81,13 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func GetHandsonText() string {
+func GetHandsonText(inText) string {
 	var outmsg bytes.Buffer	
+	var outText bytes.Buffer
 	rand.Seed(time.Now().UnixNano())
 	i := rand.Intn(100)
 	outmsg.WriteString("我覺得還是")
-	switch i % 9 {
+	switch i % 20 {
 	case 0:
 		outmsg.WriteString("小明")
 	case 1:
@@ -105,6 +106,14 @@ func GetHandsonText() string {
 		outmsg.WriteString("志偉")
 	case 8:
 		outmsg.WriteString("芭樂妹")
+	case 9:
+		outmsg.WriteString("大哥大")
+	case 10:
+		outmsg.WriteString("三哥")
+	default:
+		outText.WriteString(inText)
+		outText.WriteString("+1")
+		return outText.String()
 	}
 	outmsg.WriteString("比較帥")
 	return outmsg.String()	
