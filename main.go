@@ -90,27 +90,9 @@ func GetHandsonText(inText string) string {
 	outmsg.WriteString("我覺得還是")
 	switch i % 20 {
 	case 0:
-		outmsg.WriteString("小明")
+		outmsg.WriteString("我")
 	case 1:
-		outmsg.WriteString("彬彬")
-	case 2:
-		outmsg.WriteString("登榮")
-	case 3:
-		outmsg.WriteString("灯能")
-	case 4:
-		outmsg.WriteString("品爺")
-	case 5:
-		outmsg.WriteString("建良")
-	case 6:
-		outmsg.WriteString("虎二")
-	case 7:
-		outmsg.WriteString("志偉")
-	case 8:
-		outmsg.WriteString("芭樂妹")
-	case 9:
-		outmsg.WriteString("大哥大")
-	case 10:
-		outmsg.WriteString("三哥")
+		outmsg.WriteString("你")
 	default:
 		outText.WriteString(inText)
 		outText.WriteString("+1")
