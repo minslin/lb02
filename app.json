@@ -1,7 +1,7 @@
 {
   "name": "lb02",
-  "description": "BinBin Line Bot",
-  "repository": "https://github.com/biii/lb02",
+  "description": "MS Line Bot",
+  "repository": "https://github.com/minslin/lb02",
   "keywords": ["Line", "go", "static"],
   "buildpacks": [
     {
