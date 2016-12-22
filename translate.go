@@ -42,6 +42,12 @@ func GetTransText(key string, text string) string {
 		case strings.HasPrefix(text, "日"):
 			target = "ja"
 			intext = strings.TrimLeft(text, "日")
+		case strings.HasPrefix(text, "法"):
+			target = "fr"
+			intext = strings.TrimLeft(text, "法")
+		case strings.HasPrefix(text, "韓"):
+			target = "ko"
+			intext = strings.TrimLeft(text, "韓")
 		case strings.HasPrefix(text, "英"):
 			intext = strings.TrimLeft(text, "英")
 	}
