@@ -58,7 +58,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				var outmsg bytes.Buffer				
 switch {
 					case strings.Compare(message.Text, "同學會") == 0:
-						outmsg.WriteString("<<<同學會時間>>> 2017/1/28 16:00\r\n<<<同學會地點>>> 台中市福科路羽揚羽球館\r\n")
+						outmsg.WriteString("[同學會訊息]\r\n<時間> 2017/1/28 16:00\r\n<地點> 台中市福科路羽揚羽球館\r\n")
+					
+					case strings.Compare(message.Text, "幹")==:
+						outmsg.WriteString("老子都不老子了! 幹什麼幹!?\r\n");
 					
 					case strings.HasSuffix(message.Text, "麼帥"):
 						outmsg.WriteString(GetHandsonText(message.Text))
