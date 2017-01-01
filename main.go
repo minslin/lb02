@@ -56,13 +56,16 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				var outmsg bytes.Buffer				
-switch {
+				switch {
 					case strings.Compare(message.Text, "同學會") == 0:
-						outmsg.WriteString("[同學會訊息]\r\n<時間> 2017/1/28 16:00\r\n<地點> 台中市福科路羽揚羽球館\r\n")
+						outmsg.WriteString("[同學會訊息]\r\n<時間> 2017/1/28 16:00\r\n<地點> 台中市福科路羽揚羽球館")
 					
 					case strings.Compare(message.Text, "幹") == 0:
-						outmsg.WriteString("老子都不老子了! 幹什麼幹!?\r\n");
-					
+						outmsg.WriteString("老子都不老子了! 幹什麼幹!?")
+	
+					case strings.Compare(message.Text, "痔瘡博士") == 0: 
+						outmsg.WriteString("難得糊塗啦!!")					
+
 					case strings.HasSuffix(message.Text, "麼帥"):
 						outmsg.WriteString(GetHandsonText(message.Text))
 
